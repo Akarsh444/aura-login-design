@@ -39,7 +39,7 @@ const AuthPage = () => {
           <div className="lg:w-1/2 flex items-center justify-center p-6 lg:p-12 bg-white relative z-10">
             <div className="w-full max-w-md">
               {/* Header */}
-              <div className="mb-8">
+              <div className="mb-8 animate-fade-in">
                 <h1 className="text-3xl font-bold text-gray-900 mb-2">
                   {activeTab === "signin" ? "Welcome back!" : "Create account"}
                 </h1>
@@ -51,12 +51,12 @@ const AuthPage = () => {
               </div>
 
               {/* Tab Navigation */}
-              <div className="flex mb-8 bg-gray-100 rounded-xl p-1">
+              <div className="flex mb-8 bg-gray-100 rounded-xl p-1 animate-fade-in">
                 <button
                   onClick={() => setActiveTab("signin")}
                   className={`flex-1 py-3 px-4 rounded-lg text-sm font-medium transition-all duration-300 ${
                     activeTab === "signin"
-                      ? "bg-white text-gray-900 shadow-sm"
+                      ? "bg-white text-gray-900 shadow-sm transform scale-105"
                       : "text-gray-600 hover:text-gray-800"
                   }`}
                 >
@@ -66,7 +66,7 @@ const AuthPage = () => {
                   onClick={() => setActiveTab("signup")}
                   className={`flex-1 py-3 px-4 rounded-lg text-sm font-medium transition-all duration-300 ${
                     activeTab === "signup"
-                      ? "bg-white text-gray-900 shadow-sm"
+                      ? "bg-white text-gray-900 shadow-sm transform scale-105"
                       : "text-gray-600 hover:text-gray-800"
                   }`}
                 >
@@ -78,7 +78,7 @@ const AuthPage = () => {
               <Button
                 onClick={handleGoogleLogin}
                 variant="outline"
-                className="w-full mb-6 py-3 h-12 border-2 border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-all duration-300"
+                className="w-full mb-6 py-3 h-12 border-2 border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-all duration-300 hover:scale-[1.02] hover:shadow-md"
               >
                 <svg className="w-5 h-5 mr-3" viewBox="0 0 24 24">
                   <path
@@ -101,17 +101,22 @@ const AuthPage = () => {
                 Continue with Google
               </Button>
 
-              {/* Divider */}
+              {/* Enhanced Divider */}
               <div className="flex items-center mb-6">
-                <Separator className="flex-1" />
-                <span className="px-4 text-sm text-gray-500 bg-white font-medium">OR CONTINUE WITH EMAIL</span>
-                <Separator className="flex-1" />
+                <div className="flex-1 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
+                <div className="relative px-6">
+                  <div className="absolute inset-0 bg-white blur-sm"></div>
+                  <span className="relative text-xs font-semibold text-gray-500 bg-white px-3 py-1 rounded-full border border-gray-200">
+                    OR CONTINUE WITH EMAIL
+                  </span>
+                </div>
+                <div className="flex-1 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
               </div>
 
               {/* Form */}
               <form onSubmit={handleSubmit} className="space-y-5">
                 {activeTab === "signup" && (
-                  <div className="space-y-2">
+                  <div className="space-y-2 animate-fade-in">
                     <Label htmlFor="name" className="text-sm font-medium text-gray-700">
                       Full Name
                     </Label>
@@ -121,7 +126,7 @@ const AuthPage = () => {
                       placeholder="Enter your full name"
                       value={formData.name}
                       onChange={(e) => handleInputChange("name", e.target.value)}
-                      className="h-12 border-2 border-gray-200 focus:border-blue-500 focus:ring-blue-500 rounded-xl"
+                      className="h-12 border-2 border-gray-200 focus:border-blue-500 focus:ring-blue-500 rounded-xl transition-all duration-300 hover:border-gray-300 focus:shadow-lg focus:scale-[1.01]"
                       required
                     />
                   </div>
@@ -137,7 +142,7 @@ const AuthPage = () => {
                     placeholder="Enter your email"
                     value={formData.email}
                     onChange={(e) => handleInputChange("email", e.target.value)}
-                    className="h-12 border-2 border-gray-200 focus:border-blue-500 focus:ring-blue-500 rounded-xl"
+                    className="h-12 border-2 border-gray-200 focus:border-blue-500 focus:ring-blue-500 rounded-xl transition-all duration-300 hover:border-gray-300 focus:shadow-lg focus:scale-[1.01]"
                     required
                   />
                 </div>
@@ -153,13 +158,13 @@ const AuthPage = () => {
                       placeholder="Enter your password"
                       value={formData.password}
                       onChange={(e) => handleInputChange("password", e.target.value)}
-                      className="h-12 pr-12 border-2 border-gray-200 focus:border-blue-500 focus:ring-blue-500 rounded-xl"
+                      className="h-12 pr-12 border-2 border-gray-200 focus:border-blue-500 focus:ring-blue-500 rounded-xl transition-all duration-300 hover:border-gray-300 focus:shadow-lg focus:scale-[1.01]"
                       required
                     />
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
+                      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors hover:scale-110"
                     >
                       {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                     </button>
@@ -167,7 +172,7 @@ const AuthPage = () => {
                 </div>
 
                 {activeTab === "signup" && (
-                  <div className="space-y-2">
+                  <div className="space-y-2 animate-fade-in">
                     <Label htmlFor="confirmPassword" className="text-sm font-medium text-gray-700">
                       Confirm Password
                     </Label>
@@ -178,13 +183,13 @@ const AuthPage = () => {
                         placeholder="Confirm your password"
                         value={formData.confirmPassword}
                         onChange={(e) => handleInputChange("confirmPassword", e.target.value)}
-                        className="h-12 pr-12 border-2 border-gray-200 focus:border-blue-500 focus:ring-blue-500 rounded-xl"
+                        className="h-12 pr-12 border-2 border-gray-200 focus:border-blue-500 focus:ring-blue-500 rounded-xl transition-all duration-300 hover:border-gray-300 focus:shadow-lg focus:scale-[1.01]"
                         required
                       />
                       <button
                         type="button"
                         onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
+                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors hover:scale-110"
                       >
                         {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                       </button>
@@ -196,7 +201,7 @@ const AuthPage = () => {
                   <div className="text-right">
                     <button
                       type="button"
-                      className="text-sm text-blue-600 hover:text-blue-800 transition-colors font-medium"
+                      className="text-sm text-blue-600 hover:text-blue-800 transition-colors font-medium hover:underline"
                     >
                       Forgot Password?
                     </button>
@@ -212,12 +217,12 @@ const AuthPage = () => {
               </form>
 
               {/* Footer */}
-              <div className="mt-8 text-center">
+              <div className="mt-8 text-center animate-fade-in">
                 <p className="text-sm text-gray-600">
                   {activeTab === "signin" ? "Don't have an account? " : "Already have an account? "}
                   <button
                     onClick={() => setActiveTab(activeTab === "signin" ? "signup" : "signin")}
-                    className="text-blue-600 hover:text-blue-800 font-medium transition-colors"
+                    className="text-blue-600 hover:text-blue-800 font-medium transition-colors hover:underline"
                   >
                     {activeTab === "signin" ? "Sign up here" : "Sign in here"}
                   </button>
@@ -226,58 +231,83 @@ const AuthPage = () => {
             </div>
           </div>
 
-          {/* Right Side - Background Illustration with Overlapping Effect */}
+          {/* Right Side - Enhanced Background with Overlapping Illustration */}
           <div className="lg:w-1/2 bg-gradient-to-br from-pink-100 via-purple-50 to-blue-100 flex items-center justify-center p-6 lg:p-12 relative overflow-hidden">
-            {/* Floating Elements */}
+            {/* Enhanced Floating Elements */}
             <div className="absolute inset-0 overflow-hidden">
-              <div className="absolute top-20 left-20 w-32 h-32 bg-pink-200/30 rounded-full blur-xl animate-pulse"></div>
-              <div className="absolute top-40 right-16 w-24 h-24 bg-purple-200/40 rounded-full blur-lg animate-pulse delay-1000"></div>
-              <div className="absolute bottom-32 left-16 w-40 h-40 bg-blue-200/30 rounded-full blur-xl animate-pulse delay-500"></div>
-              <div className="absolute bottom-20 right-20 w-28 h-28 bg-yellow-200/40 rounded-full blur-lg animate-pulse delay-700"></div>
-              <div className="absolute top-60 left-1/2 w-20 h-20 bg-green-200/30 rounded-full blur-md animate-pulse delay-300"></div>
+              <div className="absolute top-20 left-20 w-32 h-32 bg-gradient-to-br from-pink-300/40 to-purple-300/40 rounded-full blur-xl animate-pulse shadow-lg"></div>
+              <div className="absolute top-40 right-16 w-24 h-24 bg-gradient-to-br from-purple-300/50 to-blue-300/50 rounded-full blur-lg animate-pulse delay-1000 shadow-md"></div>
+              <div className="absolute bottom-32 left-16 w-40 h-40 bg-gradient-to-br from-blue-300/40 to-pink-300/40 rounded-full blur-xl animate-pulse delay-500 shadow-lg"></div>
+              <div className="absolute bottom-20 right-20 w-28 h-28 bg-gradient-to-br from-yellow-300/50 to-orange-300/50 rounded-full blur-lg animate-pulse delay-700 shadow-md"></div>
+              <div className="absolute top-60 left-1/2 w-20 h-20 bg-gradient-to-br from-green-300/40 to-teal-300/40 rounded-full blur-md animate-pulse delay-300 shadow-sm"></div>
             </div>
 
-            {/* Overlapping Cheerful Illustration */}
-            <div className="absolute -left-32 top-1/2 transform -translate-y-1/2 z-20 lg:block hidden">
-              <div className="w-80 h-80 bg-gradient-to-br from-yellow-300 via-orange-400 to-pink-400 rounded-full flex items-center justify-center shadow-2xl">
-                <div className="w-64 h-64 bg-white rounded-full flex items-center justify-center shadow-lg">
-                  <div className="text-center">
-                    <div className="w-24 h-24 mx-auto mb-4 bg-gradient-to-br from-purple-400 to-pink-400 rounded-full flex items-center justify-center">
-                      <svg className="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
+            {/* Enhanced Overlapping Character Illustration */}
+            <div className="absolute -left-40 top-1/2 transform -translate-y-1/2 z-20 lg:block hidden">
+              <div className="relative">
+                {/* Main Character Container with Glow Effect */}
+                <div className="w-96 h-96 bg-gradient-to-br from-yellow-300 via-orange-400 to-pink-400 rounded-full flex items-center justify-center shadow-2xl relative overflow-hidden">
+                  {/* Glow Effect */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-yellow-300 via-orange-400 to-pink-400 rounded-full blur-xl opacity-60 animate-pulse"></div>
+                  
+                  {/* Inner Character Circle */}
+                  <div className="w-80 h-80 bg-white rounded-full flex items-center justify-center shadow-lg relative z-10">
+                    {/* Cheerful Robot/Assistant Character */}
+                    <div className="text-center relative">
+                      {/* Robot Head */}
+                      <div className="w-32 h-32 mx-auto mb-4 bg-gradient-to-br from-purple-400 to-pink-400 rounded-2xl flex items-center justify-center shadow-lg relative overflow-hidden">
+                        {/* Robot Eyes */}
+                        <div className="flex space-x-3">
+                          <div className="w-4 h-4 bg-white rounded-full animate-pulse"></div>
+                          <div className="w-4 h-4 bg-white rounded-full animate-pulse delay-200"></div>
+                        </div>
+                        {/* Robot Antenna */}
+                        <div className="absolute -top-2 left-1/2 transform -translate-x-1/2 w-1 h-4 bg-yellow-400 rounded-full"></div>
+                        <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-yellow-300 rounded-full animate-bounce"></div>
+                      </div>
+                      
+                      {/* Sparkles */}
+                      <div className="absolute -top-2 -right-2 text-2xl animate-bounce">✨</div>
+                      <div className="absolute -bottom-2 -left-2 text-xl animate-bounce delay-500">💫</div>
+                      
+                      {/* Text */}
+                      <div className="text-sm font-bold text-gray-700 mt-2">SOS Assistant</div>
+                      <div className="text-xs text-gray-500 mt-1">Ready to Help!</div>
                     </div>
-                    <div className="text-2xl font-bold text-gray-700">✨</div>
-                    <div className="text-sm font-medium text-gray-600 mt-2">Productivity<br/>Boost!</div>
                   </div>
                 </div>
+
+                {/* Blend Effects at Overlap */}
+                <div className="absolute right-0 top-0 w-24 h-full bg-gradient-to-r from-transparent via-white/30 to-white/60 blur-sm"></div>
+                <div className="absolute right-0 top-1/4 w-16 h-1/2 bg-gradient-to-r from-transparent to-white/40 rounded-l-full"></div>
               </div>
             </div>
 
-            {/* Content */}
+            {/* Enhanced Content */}
             <div className="relative z-10 text-center max-w-lg">
               <div className="mb-8">
-                <div className="w-32 h-32 mx-auto mb-6 bg-gradient-to-br from-purple-400 to-pink-400 rounded-3xl flex items-center justify-center shadow-lg">
-                  <svg className="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-32 h-32 mx-auto mb-6 bg-gradient-to-br from-purple-500 to-pink-500 rounded-3xl flex items-center justify-center shadow-xl relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-br from-purple-500 to-pink-500 rounded-3xl blur-md opacity-50 animate-pulse"></div>
+                  <svg className="w-16 h-16 text-white relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                   </svg>
                 </div>
               </div>
               
-              <h2 className="text-4xl font-bold text-gray-800 mb-4">
+              <h2 className="text-4xl font-bold text-gray-800 mb-4 animate-fade-in">
                 Join the Future of Productivity
               </h2>
-              <p className="text-lg text-gray-600 mb-8">
+              <p className="text-lg text-gray-600 mb-8 animate-fade-in delay-200">
                 Discover tools designed for the next generation. Streamline your workflow, collaborate seamlessly, and achieve more than ever before.
               </p>
               
-              <div className="flex justify-center space-x-4">
-                <div className="flex items-center space-x-2 bg-white/60 backdrop-blur-sm rounded-full px-4 py-2">
-                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+              <div className="flex justify-center space-x-4 animate-fade-in delay-300">
+                <div className="flex items-center space-x-2 bg-white/70 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg hover:scale-105 transition-transform duration-200">
+                  <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
                   <span className="text-sm text-gray-700 font-medium">Secure & Private</span>
                 </div>
-                <div className="flex items-center space-x-2 bg-white/60 backdrop-blur-sm rounded-full px-4 py-2">
-                  <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                <div className="flex items-center space-x-2 bg-white/70 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg hover:scale-105 transition-transform duration-200">
+                  <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse delay-300"></div>
                   <span className="text-sm text-gray-700 font-medium">Always Free</span>
                 </div>
               </div>
