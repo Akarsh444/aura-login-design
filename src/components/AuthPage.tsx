@@ -32,31 +32,29 @@ const AuthPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-400 via-pink-400 to-red-400 flex items-center justify-center p-4 relative overflow-hidden">
-      {/* Background decorative elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-4 -left-4 w-72 h-72 bg-white/10 rounded-full blur-xl animate-pulse"></div>
-        <div className="absolute top-1/2 -right-8 w-96 h-96 bg-yellow-300/20 rounded-full blur-2xl animate-pulse delay-1000"></div>
-        <div className="absolute -bottom-8 left-1/3 w-80 h-80 bg-blue-400/15 rounded-full blur-xl animate-pulse delay-500"></div>
-      </div>
-
-      <Card className="w-full max-w-md bg-white/95 backdrop-blur-lg border-0 shadow-2xl relative z-10">
-        <CardContent className="p-8">
-          {/* Logo/Brand */}
-          <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-              Welcome
+    <div className="min-h-screen flex flex-col lg:flex-row">
+      {/* Left Side - Authentication Form */}
+      <div className="lg:w-1/2 flex items-center justify-center p-6 lg:p-12 bg-white">
+        <div className="w-full max-w-md">
+          {/* Header */}
+          <div className="mb-8">
+            <h1 className="text-3xl font-bold text-gray-900 mb-2">
+              {activeTab === "signin" ? "Welcome back!" : "Create account"}
             </h1>
-            <p className="text-gray-600 mt-2">Join the productivity revolution</p>
+            <p className="text-gray-600">
+              {activeTab === "signin" 
+                ? "Sign in to your account to continue" 
+                : "Join us and start your journey"}
+            </p>
           </div>
 
           {/* Tab Navigation */}
-          <div className="flex mb-8 bg-gray-100 rounded-lg p-1">
+          <div className="flex mb-8 bg-gray-100 rounded-xl p-1">
             <button
               onClick={() => setActiveTab("signin")}
-              className={`flex-1 py-3 px-4 rounded-md text-sm font-medium transition-all duration-300 ${
+              className={`flex-1 py-3 px-4 rounded-lg text-sm font-medium transition-all duration-300 ${
                 activeTab === "signin"
-                  ? "bg-white text-purple-600 shadow-sm"
+                  ? "bg-white text-gray-900 shadow-sm"
                   : "text-gray-600 hover:text-gray-800"
               }`}
             >
@@ -64,9 +62,9 @@ const AuthPage = () => {
             </button>
             <button
               onClick={() => setActiveTab("signup")}
-              className={`flex-1 py-3 px-4 rounded-md text-sm font-medium transition-all duration-300 ${
+              className={`flex-1 py-3 px-4 rounded-lg text-sm font-medium transition-all duration-300 ${
                 activeTab === "signup"
-                  ? "bg-white text-purple-600 shadow-sm"
+                  ? "bg-white text-gray-900 shadow-sm"
                   : "text-gray-600 hover:text-gray-800"
               }`}
             >
@@ -78,7 +76,7 @@ const AuthPage = () => {
           <Button
             onClick={handleGoogleLogin}
             variant="outline"
-            className="w-full mb-6 py-3 border-gray-200 hover:bg-gray-50 transition-all duration-300"
+            className="w-full mb-6 py-3 h-12 border-2 border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-all duration-300"
           >
             <svg className="w-5 h-5 mr-3" viewBox="0 0 24 24">
               <path
@@ -104,12 +102,12 @@ const AuthPage = () => {
           {/* Divider */}
           <div className="flex items-center mb-6">
             <Separator className="flex-1" />
-            <span className="px-4 text-sm text-gray-500 bg-white">OR CONTINUE WITH EMAIL</span>
+            <span className="px-4 text-sm text-gray-500 bg-white font-medium">OR CONTINUE WITH EMAIL</span>
             <Separator className="flex-1" />
           </div>
 
           {/* Form */}
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-5">
             {activeTab === "signup" && (
               <div className="space-y-2">
                 <Label htmlFor="name" className="text-sm font-medium text-gray-700">
@@ -121,7 +119,7 @@ const AuthPage = () => {
                   placeholder="Enter your full name"
                   value={formData.name}
                   onChange={(e) => handleInputChange("name", e.target.value)}
-                  className="h-12 border-gray-200 focus:border-purple-400 focus:ring-purple-400"
+                  className="h-12 border-2 border-gray-200 focus:border-blue-500 focus:ring-blue-500 rounded-xl"
                   required
                 />
               </div>
@@ -137,7 +135,7 @@ const AuthPage = () => {
                 placeholder="Enter your email"
                 value={formData.email}
                 onChange={(e) => handleInputChange("email", e.target.value)}
-                className="h-12 border-gray-200 focus:border-purple-400 focus:ring-purple-400"
+                className="h-12 border-2 border-gray-200 focus:border-blue-500 focus:ring-blue-500 rounded-xl"
                 required
               />
             </div>
@@ -153,7 +151,7 @@ const AuthPage = () => {
                   placeholder="Enter your password"
                   value={formData.password}
                   onChange={(e) => handleInputChange("password", e.target.value)}
-                  className="h-12 pr-12 border-gray-200 focus:border-purple-400 focus:ring-purple-400"
+                  className="h-12 pr-12 border-2 border-gray-200 focus:border-blue-500 focus:ring-blue-500 rounded-xl"
                   required
                 />
                 <button
@@ -178,7 +176,7 @@ const AuthPage = () => {
                     placeholder="Confirm your password"
                     value={formData.confirmPassword}
                     onChange={(e) => handleInputChange("confirmPassword", e.target.value)}
-                    className="h-12 pr-12 border-gray-200 focus:border-purple-400 focus:ring-purple-400"
+                    className="h-12 pr-12 border-2 border-gray-200 focus:border-blue-500 focus:ring-blue-500 rounded-xl"
                     required
                   />
                   <button
@@ -196,7 +194,7 @@ const AuthPage = () => {
               <div className="text-right">
                 <button
                   type="button"
-                  className="text-sm text-purple-600 hover:text-purple-800 transition-colors"
+                  className="text-sm text-blue-600 hover:text-blue-800 transition-colors font-medium"
                 >
                   Forgot Password?
                 </button>
@@ -205,7 +203,7 @@ const AuthPage = () => {
 
             <Button
               type="submit"
-              className="w-full h-12 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02]"
+              className="w-full h-12 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 hover:from-purple-700 hover:via-pink-700 hover:to-blue-700 text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] rounded-xl"
             >
               {activeTab === "signin" ? "Sign In" : "Create Account"}
             </Button>
@@ -217,14 +215,55 @@ const AuthPage = () => {
               {activeTab === "signin" ? "Don't have an account? " : "Already have an account? "}
               <button
                 onClick={() => setActiveTab(activeTab === "signin" ? "signup" : "signin")}
-                className="text-purple-600 hover:text-purple-800 font-medium transition-colors"
+                className="text-blue-600 hover:text-blue-800 font-medium transition-colors"
               >
                 {activeTab === "signin" ? "Sign up here" : "Sign in here"}
               </button>
             </p>
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
+
+      {/* Right Side - Background Illustration */}
+      <div className="lg:w-1/2 bg-gradient-to-br from-pink-100 via-purple-50 to-blue-100 flex items-center justify-center p-6 lg:p-12 relative overflow-hidden">
+        {/* Floating Elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-20 left-20 w-32 h-32 bg-pink-200/30 rounded-full blur-xl animate-pulse"></div>
+          <div className="absolute top-40 right-16 w-24 h-24 bg-purple-200/40 rounded-full blur-lg animate-pulse delay-1000"></div>
+          <div className="absolute bottom-32 left-16 w-40 h-40 bg-blue-200/30 rounded-full blur-xl animate-pulse delay-500"></div>
+          <div className="absolute bottom-20 right-20 w-28 h-28 bg-yellow-200/40 rounded-full blur-lg animate-pulse delay-700"></div>
+          <div className="absolute top-60 left-1/2 w-20 h-20 bg-green-200/30 rounded-full blur-md animate-pulse delay-300"></div>
+        </div>
+
+        {/* Content */}
+        <div className="relative z-10 text-center max-w-lg">
+          <div className="mb-8">
+            <div className="w-32 h-32 mx-auto mb-6 bg-gradient-to-br from-purple-400 to-pink-400 rounded-3xl flex items-center justify-center shadow-lg">
+              <svg className="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+            </div>
+          </div>
+          
+          <h2 className="text-4xl font-bold text-gray-800 mb-4">
+            Join the Future of Productivity
+          </h2>
+          <p className="text-lg text-gray-600 mb-8">
+            Discover tools designed for the next generation. Streamline your workflow, collaborate seamlessly, and achieve more than ever before.
+          </p>
+          
+          <div className="flex justify-center space-x-4">
+            <div className="flex items-center space-x-2 bg-white/60 backdrop-blur-sm rounded-full px-4 py-2">
+              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+              <span className="text-sm text-gray-700 font-medium">Secure & Private</span>
+            </div>
+            <div className="flex items-center space-x-2 bg-white/60 backdrop-blur-sm rounded-full px-4 py-2">
+              <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+              <span className="text-sm text-gray-700 font-medium">Always Free</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
