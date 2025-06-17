@@ -85,6 +85,7 @@
 
   body {
     @apply bg-background text-foreground;
+    overflow-x: hidden;
   }
 }
 
@@ -164,6 +165,67 @@
       box-shadow: 0 0 10px rgba(59, 130, 246, 0.6), 0 0 20px rgba(59, 130, 246, 0.5), 0 0 30px rgba(59, 130, 246, 0.4);
     }
   }
+
+  /* Neon Sci-Fi Effects */
+  @keyframes neon-glow-cyan {
+    0%, 100% {
+      box-shadow: 
+        0 0 10px rgba(6, 182, 212, 0.5),
+        0 0 20px rgba(6, 182, 212, 0.3),
+        0 0 30px rgba(6, 182, 212, 0.2),
+        inset 0 0 10px rgba(6, 182, 212, 0.1);
+    }
+    50% {
+      box-shadow: 
+        0 0 20px rgba(6, 182, 212, 0.8),
+        0 0 40px rgba(6, 182, 212, 0.6),
+        0 0 60px rgba(6, 182, 212, 0.4),
+        inset 0 0 20px rgba(6, 182, 212, 0.2);
+    }
+  }
+
+  @keyframes neon-glow-pink {
+    0%, 100% {
+      box-shadow: 
+        0 0 10px rgba(236, 72, 153, 0.5),
+        0 0 20px rgba(236, 72, 153, 0.3),
+        0 0 30px rgba(236, 72, 153, 0.2),
+        inset 0 0 10px rgba(236, 72, 153, 0.1);
+    }
+    50% {
+      box-shadow: 
+        0 0 20px rgba(236, 72, 153, 0.8),
+        0 0 40px rgba(236, 72, 153, 0.6),
+        0 0 60px rgba(236, 72, 153, 0.4),
+        inset 0 0 20px rgba(236, 72, 153, 0.2);
+    }
+  }
+
+  @keyframes neon-glow-purple {
+    0%, 100% {
+      box-shadow: 
+        0 0 10px rgba(147, 51, 234, 0.5),
+        0 0 20px rgba(147, 51, 234, 0.3),
+        0 0 30px rgba(147, 51, 234, 0.2),
+        inset 0 0 10px rgba(147, 51, 234, 0.1);
+    }
+    50% {
+      box-shadow: 
+        0 0 20px rgba(147, 51, 234, 0.8),
+        0 0 40px rgba(147, 51, 234, 0.6),
+        0 0 60px rgba(147, 51, 234, 0.4),
+        inset 0 0 20px rgba(147, 51, 234, 0.2);
+    }
+  }
+
+  @keyframes grid-pulse {
+    0%, 100% {
+      opacity: 0.1;
+    }
+    50% {
+      opacity: 0.3;
+    }
+  }
   
   .animate-fade-in {
     animation: fade-in 0.3s ease-out;
@@ -198,6 +260,84 @@
 
   .animate-pulse-glow {
     animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  /* Neon Effect Classes */
+  .neon-glow-cyan {
+    animation: neon-glow-cyan 3s ease-in-out infinite;
+  }
+
+  .neon-glow-pink {
+    animation: neon-glow-pink 3.5s ease-in-out infinite;
+  }
+
+  .neon-glow-purple {
+    animation: neon-glow-purple 4s ease-in-out infinite;
+  }
+
+  .neon-glow-cyan-light {
+    box-shadow: 
+      0 0 10px rgba(6, 182, 212, 0.3),
+      0 0 20px rgba(6, 182, 212, 0.2),
+      inset 0 0 10px rgba(6, 182, 212, 0.1);
+  }
+
+  .neon-glow-pink-light {
+    box-shadow: 
+      0 0 10px rgba(236, 72, 153, 0.3),
+      0 0 20px rgba(236, 72, 153, 0.2),
+      inset 0 0 10px rgba(236, 72, 153, 0.1);
+  }
+
+  .neon-glow-purple-light {
+    box-shadow: 
+      0 0 10px rgba(147, 51, 234, 0.3),
+      0 0 20px rgba(147, 51, 234, 0.2),
+      inset 0 0 10px rgba(147, 51, 234, 0.1);
+  }
+
+  .neon-card-glow {
+    box-shadow: 
+      0 0 20px rgba(139, 92, 246, 0.2),
+      0 0 40px rgba(139, 92, 246, 0.1),
+      0 20px 40px rgba(0, 0, 0, 0.1);
+  }
+
+  .neon-device-glow {
+    box-shadow: 
+      0 0 15px rgba(147, 51, 234, 0.3),
+      0 0 30px rgba(147, 51, 234, 0.2);
+  }
+
+  .neon-button-glow:hover {
+    box-shadow: 
+      0 0 20px rgba(239, 68, 68, 0.4),
+      0 0 40px rgba(236, 72, 153, 0.3),
+      0 10px 30px rgba(0, 0, 0, 0.2);
+  }
+
+  .neon-badge {
+    box-shadow: 
+      0 0 10px rgba(255, 255, 255, 0.2),
+      0 0 20px rgba(139, 92, 246, 0.1);
+  }
+
+  /* Grid Lines Effect */
+  .grid-lines-neon {
+    background-image: 
+      linear-gradient(rgba(6, 182, 212, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(6, 182, 212, 0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: grid-pulse 4s ease-in-out infinite;
+  }
+
+  /* Input Focus Effects */
+  .input-neon-focus:focus {
+    box-shadow: 
+      0 0 0 4px rgba(59, 130, 246, 0.1), 
+      0 0 20px rgba(59, 130, 246, 0.2),
+      0 0 40px rgba(139, 92, 246, 0.1);
+    border-color: rgb(59 130 246);
   }
 
   /* Custom focus effects */
