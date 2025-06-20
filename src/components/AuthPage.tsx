@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Eye, EyeOff } from "lucide-react";
+import { useSignIn, useSignUp } from '@clerk/clerk-react';
 
 const AuthPage = () => {
   const [activeTab, setActiveTab] = useState<"signin" | "signup">("signin");
@@ -17,6 +18,9 @@ const AuthPage = () => {
     password: "",
     confirmPassword: ""
   });
+  const { isLoaded: signInLoaded, signIn, setActive: setSignInActive } = useSignIn();
+  const { isLoaded: signUpLoaded, signUp, setActive: setSignUpActive } = useSignUp();
+  const [error, setError] = useState<string | null>(null);
 
   const quotes = [
     "Even a small step today is progress.",
@@ -48,13 +52,54 @@ const AuthPage = () => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form submitted:", { activeTab, formData });
+    setError(null);
+    try {
+      if (activeTab === 'signin') {
+        if (!signInLoaded) return;
+        const result = await signIn.create({ identifier: formData.email, password: formData.password });
+        await setSignInActive({ session: result.createdSessionId });
+      } else {
+        if (!signUpLoaded) return;
+        if (formData.password !== formData.confirmPassword) {
+          setError('Passwords do not match');
+          return;
+        }
+        const result = await signUp.create({ emailAddress: formData.email, password: formData.password });
+        await signUp.prepareEmailAddressVerification({ strategy: 'email_code' });
+        await setSignUpActive({ session: result.createdSessionId });
+      }
+    } catch (err: any) {
+      setError(err.errors?.[0]?.message || err.message || 'Authentication failed');
+    }
   };
 
-  const handleGoogleLogin = () => {
-    console.log("Google login clicked");
+  const handleGoogleLogin = async () => {
+    if (!signIn) return;
+    await signIn.authenticateWithRedirect({
+      strategy: 'oauth_google',
+      redirectUrl: window.location.origin,
+      redirectUrlComplete: window.location.origin,
+    });
+  };
+
+  const handleFacebookLogin = async () => {
+    if (!signIn) return;
+    await signIn.authenticateWithRedirect({
+      strategy: 'oauth_facebook',
+      redirectUrl: window.location.origin,
+      redirectUrlComplete: window.location.origin,
+    });
+  };
+
+  const handleAppleLogin = async () => {
+    if (!signIn) return;
+    await signIn.authenticateWithRedirect({
+      strategy: 'oauth_apple',
+      redirectUrl: window.location.origin,
+      redirectUrlComplete: window.location.origin,
+    });
   };
 
   const getTimeGradient = () => {
@@ -240,6 +285,7 @@ const AuthPage = () => {
                   className="flex-1"
                 >
                   <Button
+                    onClick={handleFacebookLogin}
                     variant="outline"
                     className="w-full h-11 border-2 border-gray-200/60 dark:border-gray-600/60 hover:border-blue-400 dark:hover:border-blue-300 bg-white/80 dark:bg-gray-700/80 backdrop-blur-sm hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all duration-300 hover:shadow-md rounded-xl"
                   >
@@ -256,6 +302,7 @@ const AuthPage = () => {
                   className="flex-1"
                 >
                   <Button
+                    onClick={handleAppleLogin}
                     variant="outline"
                     className="w-full h-11 border-2 border-gray-200/60 dark:border-gray-600/60 hover:border-gray-400 dark:hover:border-gray-300 bg-white/80 dark:bg-gray-700/80 backdrop-blur-sm hover:bg-gray-50 dark:hover:bg-gray-600/20 transition-all duration-300 hover:shadow-md rounded-xl"
                   >
@@ -430,6 +477,11 @@ const AuthPage = () => {
                             Forgot Password?
                           </motion.button>
                         </div>
+                      )}
+
+                      {/* Error Message */}
+                      {error && (
+                        <div className="error-container text-red-600 dark:text-red-400 text-sm mb-2">{error}</div>
                       )}
 
                       <motion.div
